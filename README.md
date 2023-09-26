@@ -3,6 +3,7 @@
 * [Identitas](#identitas-penulis)
 * [Tugas 2](#tugas-2)
 * [Tugas 3](#tugas-3)
+* [Tugas 4](#tugas-4)
 # Identitas Penulis
 Nama    : Patrick Samuel Evans Simanjuntak<br>
 NPM     : 2206028251<br>
@@ -121,6 +122,7 @@ Sekian pembahasan dari saya. Mohon maaf bila ada kesalahan. Have a good day! :gr
 * [Perbedaan `POST` dan `GET` pada Django](#perbedaan-post-dan-get-pada-django)
 * [Perbedaan utama antara XML, JSON, dan HTML](#bagan-request-client)
 * [Alasan mengapa JSON sering digunakan](#alasan-json-sering-digunakan-dalam-pertukaran-data-antara-aplikasi-web-modern)
+* [Referensi](#referensi-tugas-3)
 
 ## Langkah-langkah pembuatan *form*, penambahan fungsi *views*, dan Pembuatan Routing
 ### Pembuatan *Form*
@@ -353,9 +355,219 @@ XML juga memiliki suatu keunggulan dibandingkan dengan JSON, yaitu:
 Seperti yang telah dibahas pada poin sebelumnya, JSON memiliki beberapa keunggulan yang membuatnya menjadi sering digunakan dalam pertukaran data antar aplikasi web modern. Pertama, format *syntax* JSON yang berupa pasangan *key*-*value* jauh lebih mudah dibaca dibandingkan dengan format *tag* pada XML. Kedua, JSON juga memiliki ukuran *file* yang lebih kecil dibandingkan dengan XML. Ketiga, transfer data pada JSON dapat dilakukan dengan lebih cepat. Terakhir, JSON juga lebih aman dibandingkan dengan XML.
 
 
-Sumber:
+## Referensi Tugas 3
 - https://docs.djangoproject.com/en/4.2/topics/forms/#get-and-post
 - https://www.w3schools.com/whatis/whatis_json.asp
 - https://aws.amazon.com/compare/the-difference-between-json-xml
 - Slide Week 4
+</details>
+
+# Tugas 4
+<details open>
+<summary>Click here to see Tugas 4</summary>
+
+## Daftar Isi Tugas 4
+
+* [Tahapan Penerapan Tugas 4](#langkah-langkah-penerapan-cookie--session-login-logout-serta-registrasi)
+* [Penjelasan `UserCreationForm`, Kelebihan, serta Kekurangan](#apa-itu-usercreationform-kekurangan-serta-kelebihannya)
+* [Perbedaan Autentikasi dan Otorisasi pada Django](#perbedaan-autentikasi-dan-otorisasi-pada-django)
+* [*Cookies* dan Penggunaan *Cookies* pada Django](#cookies-dan-penggunaan-cookies-pada-django)
+* [Penggunaan *Cookies* dalam Aspek Keamanan Siber](#penggunaan-cookies-dalam-aspek-keamanan-siber)
+* [Referensi](#referensi-tugas-4)
+
+## Langkah-langkah Penerapan *Cookie* & *Session*, *Login*, *Logout*, serta *Registrasi*
+### Pembuatan fungsi *register*, *login*, dan *logout*
+Pertama, saya menyalakan *virtual environment* terlebih dahulu dengan *syntax* `env\Scripts\activate`. Selanjutnya, saya menambahkan kode berikut pada fungsi `register` pada `views.py`.
+```
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+Saya juga membuat fungsi *login*, *logout*, dan *create_product* dengan kode sebagai berikut:
+```
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+def create_product(request):
+    form = ItemForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        item = form.save(commit=False)
+        item.user = request.user
+        item.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+### Membuat berkas HTML untuk menampilkan halaman *login*, daftar barang, dan *register*
+Saya pun membuat `register.html` yang mengatur tampilan visual untuk proses registrasi pengguna dengan kode berikut
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
+    
+    <h1>Register</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
+```
+Saya juga membuat `login.html` untuk membuat sebuah laman untuk proses *login* dengan kode sebagai berikut:
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}
+```
+### Merestriksi Akses Halaman Main
+Untuk merestriksi akses halaman main agar setiap pengguna hanya dapat mengakses barangnya masing-masing. Saya menambahkan kode berikut pada `views.py`:
+```
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/login')
+def show_main(request):
+```
+### Melakukan *routing* URL pada masing-masing fungsi
+Untuk melakukan *routing* URL, saya menambahkan kode berikut pada `urlpatterns` pada berkas `urls.py` di dalam *folder* main:
+```
+path('logout/', logout_user, name='logout'),
+path('login/', login_user, name='login'),
+path('register/', register, name='register'),
+```
+### Menghubungkan Model `Item` dengan `User`
+Saya menghubungkan model `Item` dengan `User` dengan menambahkan kode sebagai berikut pada `models.py`:
+```
+from django.contrib.auth.models import User
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+### Mengubah Fungsi `show_main` pada `views.py`
+Saya mengubah fungsi `show_main` untuk menampilkan nama masing-masing pengguna dan menambahkan informasi *cookie last _login* pada halaman web. Berikut adalah hasil akhir dari fungsi `show_main`:
+```
+def show_main(request):
+    items = Item.objects.filter(user=request.user)
+
+    context = {
+        'name': request.user.username,
+        'class': 'PBP C', # Kelas PBP kamu
+        'items': items,
+        'last_login': request.COOKIES['last_login']
+    }
+
+    return render(request, "main.html", context)
+```
+### Mencoba Membuat `User` dan Menambahkan Produk
+Saya mencoba membuat suatu pengguna dan menambahkan produk untuk memastikan aplikasi dapat berjalan dengan baik.
+## Apa Itu `UserCreationForm`, Kekurangan, serta Kelebihannya
+`UserCreationForm` pada Django adalah suatu sistem autentikasi pengguna bawaan dari Django yang meng-*inherit* kelas `ModelForm`. `UserCreationForm` berfungsi untuk membantu pembuatan suatu formulir pembuatan *user* baru pada suatu aplikasi *web*, sehingga tidak perlu membuat kode pembuatan formulir dari awal lagi.
+
+Kelebihan dari `UserCreationForm` adalah tersedianya kemudahan pembuatan formulir tanpa harus membuat kode dari awal. Formulir tersebut juga telah disertai dengan proses autentikasi yang ada. Selain itu, `UserCreationForm` juga telah dilengkapi dengan enkripsi sandi dengan menggunakan algoritma PBKDF2 dengan *hash* SHA256.
+
+Kekurangan dari `UserCreationForm` adalah *template* awalnya yang hanya mempunyai dua kolom, yaitu *username* dan *password*. Apabila kita ingin menambahkan kolom baru, kita harus menambahkannya secara manual. Penambahan kolom baru tersebut dianggap cukup rumit. `UserCreationForm` juga memiliki *design* yang sederhana dan kurang baik dalam segi estetika. Oleh karena itu, dibutuhkan penambahan kode `CSS` untuk menambah poin di sisi estetika. `UserCreationForm` juga hanya memiliki proses *login* yang sederhana dan apabila kita ingin menambahkan suatu alur logika pada *login*, kita harus menambahkan kodenya secara manual.
+
+## Perbedaan Autentikasi dan Otorisasi pada Django
+Autentikasi merupakan proses verifikasi untuk memastikan apakah orang yang mencoba login adalah benar-benar *user* yang ingin login atau bukan. Di sisi lain, *authorization* merupakan proses bagi program untuk menentukan apa saja yang dapat dilakukan oleh pengguna yang sedang *login*. Kedua hal tersebut merupakan dua hal esensial dimana autentikasi menentukan apakah seseorang merupakan pengguna atau bukan dan otorisasi menentukan hal-hal yang dapat diakses pengguna dan hal-hal yang tidak dapat diakses.
+
+## *Cookies* dan Penggunaan *Cookies* pada Django
+*Cookies* adalah berkas teks yang berisi data yang kecil, seperti *username* dan *password* yang digunakan untuk mengidentifikasi masing-masing pengguna. *Cookie* digunakan agar *server* dapat mengidentifikasi ID yang ada pada *cookie* pengguna, sehingga *server* dapat menentukan dan menampilkan informasi untuk masing-masing pengguna. *Cookies* biasanya digunakan untuk melakukan personalisasi rekomendasi pada masing-masing pengguna dengan cara melakukan *tracking* pada masing-masing pengguna. Selain itu, *cookie* juga digunakan untuk *user session* seperti menampilkan nama dari seorang *user*.
+
+## Penggunaan *Cookies* dalam Aspek Keamanan Siber
+Secara *default*, penggunaan *cookie* sebenarnya rawan terhadap serangan siber, apalagi jika *cookie* tidak dienkripsi. Serangan-serangan seperti Cross-Site Scripting (XSS) dan Cross-Site Request Forgery (CSRF) menjadi hal-hal yang harus diwaspadai untuk mencegah serangan siber. Oleh karena itu, ada beberapa hal yang dapat dilakukan untuk mencegah adanya serangan siber melalui *cookie*. Pertama, menggunakan protokol HTTPS yang terbukti lebih aman dibanding protokol HTTP. Hal ini disebabkan karena protokol HTTPS hanya akan mengirimkan data ke *server* dengan *request* yang terenkripsi. Selain itu, kita juga perlu mengenkripsi *cookie* untuk meningkatkan keamanan pada *cookie*. Kita juga dapat meenggunakan proteksi bawaan Django untuk memproteksi *cookie* dari serangan CSRF dengan menggunakan `{% csrf_token %}`.
+
+## Referensi Tugas 4
+- https://www.javatpoint.com/django-usercreationform
+- https://www.smashingmagazine.com/2020/02/django-highlights-user-models-authentication/
+- https://docs.djangoproject.com/en/4.2/topics/auth/#:~:text=The%20Django%20authentication%20system%20handles,to%20refer%20to%20both%20tasks.
 </details>
