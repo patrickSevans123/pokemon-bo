@@ -571,3 +571,81 @@ Secara *default*, penggunaan *cookie* sebenarnya rawan terhadap serangan siber, 
 - https://www.smashingmagazine.com/2020/02/django-highlights-user-models-authentication/
 - https://docs.djangoproject.com/en/4.2/topics/auth/#:~:text=The%20Django%20authentication%20system%20handles,to%20refer%20to%20both%20tasks.
 </details>
+
+# Tugas 5
+<details open>
+<summary>Click here to see Tugas 5</summary>
+
+## Daftar Isi Tugas 5
+
+* [Penerapan Kustomisasi Aplikasi Pokemon Bo dengan CSS](#penerapan-kustomisasi-aplikasi-pokemon-bo-dengan-css)
+* [Manfaat Setiap *Element Selector* dan Penggunaannya](#manfaat-setiap-element-selector-dan-penggunaannya)
+* [HTML5 Tag](#html5-tag)
+* [Perbedaan *Margin* dan *Padding*](#perbedaan-margin-dan-padding)
+* [Perbedaan *Framework* CSS Tailwind dan Bootstrap serta Penggunaannya](#perbedaan-framework-tailwind-dan-bootstrap)
+
+## Penerapan Kustomisasi Aplikasi Pokemon Bo dengan CSS
+Pertama saya menyalakan *virtual environment*. Kemudian, saya menambahkan Bootstrap CSS dan JS pada `base.html`. Setelah itu, saya menambahkan *navbar* dan menambahkan tombol log out serta tombol add pokemon pada *navbar*. Saya juga menambahkan tombol edit pokemon yang akan terhubung dengan `edit_product.html` dan fungsi `edit_product`. Selain itu, saya juga menambahkan tombol delete pokemon yang akan terhubung dengan `delete_product.html` dan fungsi `delete_product`. Saya juga mengubah warna teks dari Pokemon pada index terakhir dengan menggunakan *custom class* yang diimplementasikan pada for loop. Terakhir, saya melakukan kustomisasi dengan CSS untuk mengubah tampilan visual dari aplikasi.
+## Manfaat Setiap *Element Selector* dan Penggunaannya
+*Element selector* pada CSS berfungsi untuk memilih elemen HTML yang digunakan. Kemudian, kita dapat mengatur tampilan dari elemen yang kita pilih tersebut. *Element selector* akan mengatur seluruh elemen dengan tipe yang sama pada suatu berkas HTML. Contoh penerapannya adalah sebagai berikut:
+Kode HTML:
+```
+<body>
+  <div>
+    
+    <h1>Hello Guys</h1>
+    <h1>What's Up?</h1>
+    <h2>Welcome Back to My Github Page</h2>
+  </div>
+  ...
+</body>
+```
+Kode CSS:
+```
+h1 {
+  color: red;
+  font-size:8px;
+}
+
+```
+Potongan Kode CSS tersebut berfungsi untuk mengubah seluruh elemen h1, sehingga baris "Hello Guys" dan "What's Up?" akan memiliki warna merah dan ukuran huruf 8 pixel.
+
+## HTML5 Tag
+Berikut adalah beberapa HTML Tag yang cukup populer dan saya ketahui:
+
+| HTML Tag    | Deskripsi                                   |
+| ----------- | -----------                                 |
+| `<a>`       | Menunjukkan *hyperlink*                     |
+| `<b>`       | Menunjukkan teks dengan tebal               |
+| `<title>`   | Menunjukkan judul dari dokumen              |
+| `<table>`   | Menunjukkan tabel                           |
+| `<tr>`      | Menunjukkan baris pada tabel                |
+| `<th>`      | Menunjukkan judul pada tabel                |
+| `<video>`   | Meng-*embed* video pada dokumen HTML        | 
+| `<p>`       | Menunjukkan paragraf                        |
+| `<time>`    | Menunjukkan waktu                           |
+| `<form>`    | Menunjukkan form yang dapat diisi penggunaan|
+| `<var>`     | Menunjukkan variabel                        |
+
+## Perbedaan *Margin* dan *Padding*
+Berikut adalah perbedaan antara *margin* dan *padding*:
+| *Margin*                         | *Padding*                                   |
+| -----------                    | -----------                               |
+| *Whitespace* yang mengelilingi sebuah elemen    | Ruang kosong yang ada di sekitar elemen                 |   
+| Dapat menggunakan *auto-setting* untuk mengatur *margin*    | Tidak dapat menggunakan *auto-setting* untuk mengatur *padding*                |
+| Dapat memiliki nilai negatif    | Tidak dapat memiliki nilai negatif                |  
+| Tidak dapat terdampak oleh *styling*   | Dapat terdampak oleh *styling*               |  
+| Berfungsi untuk mengatur jarak elemen HTML dari luar   | Berfungsi untuk mengatur jarak elemen HTML dari dalam                |  
+--------------------------------------------
+
+## Perbedaan *Framework* Tailwind dan Bootstrap
+| Tailwind    | Bootstrap                                   |
+| ----------- | -----------                                 |
+|  Tailwind membangun tampilan melalui gabungan kelas-kelas utilitas yang telah ditentukan sebelumnya     | Memiliki komponen dan *style* yang sudah ditentukan oleh *framework* dan dapat digunakan secara langsung   |
+| Memiliki berkas yang sedikit lebih kecil       | Memiliki berkas yang sedikit lebih besar karena mengandung komponen dan *style* yang sudah ditentukan sebelumnya              |
+| Memiliki kemampuan kustomisasi dan fleksibilitas yang tinggi   | Memiliki tampilan yang lebih konsisten          |
+| Membutuhkan pembelajaran yang mendalam karena perlu memahami kelas-kelas utilitas yang ada   | Pembelajaran yang dibutuhkan tergolong cepat karena dapat menggunakan komponen yang telah ditentukan oleh *framework*         |
+---------------------------------------------------------
+Kita dapat menggunakan Tailwind jika memiliki proyek jangka panjang yang membutuhkan tingkat kustomisasi yang tinggi pada aplikasi kita. Sebaliknya, kita dapat menggunakan Bootstrap jika memiliki proyek yang mengutamakan kemudahan penggunaan dibanding dengan kemampuan kustomisasi.
+
+</details>

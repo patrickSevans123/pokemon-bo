@@ -1,45 +1,50 @@
-{% extends 'base.html' %}
-
-{% block meta %}
+<!DOCTYPE html>
+<html>
+<head>
     <title>Login</title>
-{% endblock meta %}
+</head>
+<style>
+.button:hover {
+    background-color: #007BFF; 
+}
+</style>
+<body style="background-color: #FFC0CB;"> 
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+    <div style="background-color: #fff; border-radius: 15px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); width: 400px; padding: 20px; text-align: center;">
 
-{% block content %}
+        <h1 style="font-family: 'Arial', sans-serif; font-size: 24px;">Login</h1>
 
-<div class = "login">
+        <form method="POST" action="" style="padding: 20px;">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="username" style="font-size: 18px;">Username:</label>
+                <input type="text" name="username" id="username" placeholder="Username" style="border-radius: 10px; font-size: 18px; padding: 10px;">
+            </div>
 
-    <h1>Login</h1>
+            <div style="margin-bottom: 20px;">
+                <label for="password" style="font-size: 18px;">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Password" style="border-radius: 10px; font-size: 18px; padding: 10px;">
+            </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+            <button class="button" style="background-color: #87CEFA; /* Pastel Blue */ color: #fff; border-radius: 10px; font-size: 20px; padding: 10px; width: 100%;"
+                onmouseover="this.style.backgroundColor='#007BFF';"
+                onmouseout="this.style.backgroundColor='#87CEFA';"
+            >
+                Login
+            </button>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+        </form>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+        {% if messages %}
+            <ul style="list-style: none; padding: 0;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
+        <p style="font-size: 14px;">Don't have an account yet? <a href="{% url 'main:register' %}" style="color: #87CEFA; /* Pastel Blue */ text-decoration: none;">Register Now</a></p>
+    </div>
 </div>
-
-{% endblock content %}
+</body>
+</html>

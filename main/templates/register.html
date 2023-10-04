@@ -4,31 +4,48 @@
     <title>Register</title>
 {% endblock meta %}
 
-{% block content %}  
+{% block content %}
+<div style="background-color: #FFC0CB; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div style="background-color: #fff; border-radius: 15px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); width: 450px; padding: 20px; text-align: center;">
 
-<div class = "login">
-    
-    <h1>Register</h1>  
+        <h2 style="font-family: 'Arial', sans-serif;">Register</h2>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
+        <form method="POST" style="padding: 20px; text-align: center;">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="{{ form.username.id_for_label }}" style="font-size: 18px;">Username:</label>
+                <br>
+                {{ form.username }}
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="{{ form.password1.id_for_label }}" style="font-size: 18px;">Password:</label>
+                <br>
+                {{ form.password1 }}
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="{{ form.password2.id_for_label }}" style="font-size: 18px;">Confirm Password:</label>
+                <br>
+                {{ form.password2 }}
+            </div>
+
+            <button class="button" style="background-color: #87CEFA; color: #fff; border-radius: 10px; font-size: 20px; padding: 10px; width: 100%;"
+                onmouseover="this.style.backgroundColor='#007BFF';"
+                onmouseout="this.style.backgroundColor='#87CEFA';"
+            >
+                Register
+            </button>
+
         </form>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
-</div>  
-
+        {% if messages %}
+            <ul style="list-style: none; padding: 0; text-align: left;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}
