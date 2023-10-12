@@ -1,2 +1,2 @@
 release: django-admin migrate --noinput
-web: gunicorn pokemonbo.wsgi
+web: gunicorn pokemon_bo.wsgi
