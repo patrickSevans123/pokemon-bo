@@ -1,5 +1,5 @@
 # Pembahasan Tugas-tugas PBP
-Link Aplikasi: http://patrick-samuel-tutorial.pbp.cs.ui.ac.id/
+Link Aplikasi: http://patrick-samuel-tugas.pbp.cs.ui.ac.id/
 # Daftar Isi
 * [Identitas](#identitas-penulis)
 * [Tugas 2](#tugas-2)
