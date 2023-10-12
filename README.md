@@ -1,4 +1,5 @@
 # Pembahasan Tugas-tugas PBP
+Link Aplikasi: http://patrick-samuel-tutorial.pbp.cs.ui.ac.id/
 # Daftar Isi
 * [Identitas](#identitas-penulis)
 * [Tugas 2](#tugas-2)
@@ -10,7 +11,7 @@ NPM     : 2206028251<br>
 Kelas   : PBP C<br>
 
 # Tugas 2
-<details open>
+<details close>
 <summary>Click here to see Tugas 2</summary>
 
 ## Daftar Isi Tugas 2
@@ -113,7 +114,7 @@ Sekian pembahasan dari saya. Mohon maaf bila ada kesalahan. Have a good day! :gr
 </details>
 
 # Tugas 3
-<details open>
+<details close>
 <summary>Click here to see Tugas 3</summary>
 
 ## Daftar Isi Tugas 3
@@ -363,7 +364,7 @@ Seperti yang telah dibahas pada poin sebelumnya, JSON memiliki beberapa keunggul
 </details>
 
 # Tugas 4
-<details open>
+<details close>
 <summary>Click here to see Tugas 4</summary>
 
 ## Daftar Isi Tugas 4
@@ -573,7 +574,7 @@ Secara *default*, penggunaan *cookie* sebenarnya rawan terhadap serangan siber, 
 </details>
 
 # Tugas 5
-<details open>
+<details close>
 <summary>Click here to see Tugas 5</summary>
 
 ## Daftar Isi Tugas 5
@@ -648,4 +649,39 @@ Berikut adalah perbedaan antara *margin* dan *padding*:
 ---------------------------------------------------------
 Kita dapat menggunakan Tailwind jika memiliki proyek jangka panjang yang membutuhkan tingkat kustomisasi yang tinggi pada aplikasi kita. Sebaliknya, kita dapat menggunakan Bootstrap jika memiliki proyek yang mengutamakan kemudahan penggunaan dibanding dengan kemampuan kustomisasi.
 
+</details>
+
+# Tugas 6
+<details open>
+<summary>Click here to see Tugas 6</summary>
+
+## Daftar Isi Tugas 6
+
+* [Tahapan Penerapan AJAX](#tahapan-penerapan-ajax)
+* [Perbedaan *Asynchronous Programming* dengan *Synchronous Programming*](#perbedaan-asynchronous-programming-dengan-synchronous-programming)
+* [Paradigma *Event-driven Programming*](#paradigma-event-driven-programming)
+* [Penerapan *Asynchronous Programming* pada AJAX](#penerapan-asynchronous-programming-pada-ajax)
+* [Perbandingan Fetch API dengan Library JQuery](#perbandingan-fetch-api-dengan-library-JQuery)
+* [Referensi](#referensi-tugas-6)
+
+## Tahapan Penerapan AJAX
+Pertama, saya menambahkan dua fungsi, yaitu fungsi `add_product_ajax` dan `delete_product_ajax` di `views.py`. Kemudian, saya melakukan membuat *routing* URL untuk kedua fungsi tersebut di berkas `urls.py`. Saya juga menambahkan fungsi `getProducts`, `refreshProducts`, `addProduct`, dan `deleteProduct`. Masing-masing fungsi tersebut memiliki fungsi untuk mengambil item, me-*refresh* item untuk memperbarui perubahan yang terjadi, menambah item, dan menghapus item. Saya juga menghapus tabel yang telah dibuat pada tugas sebelumnya dan menggantinya menjadi *cards*.
+
+## Perbedaan *Asynchronous Programming* dengan *Synchronous Programming*
+*Synchronous Programming* merupakan jenis *programming* dimana program akan mengeksekusi tugas secara satu per satu sesuai dengan urutan yang ada. Di sisi lain *asynchronous programming* merupakan jenis *programming* yang setiap tugasnya dapat dikerjakan secara bersama-sama tanpa harus memperhatikan urutan dari tugas yang ada. Konsep *synchronous programming* lahir terlebih dahulu dibandingkan dengan *asynchronous programming*. Akan tetapi, penggunaan *asynchronous programming* dirasa lebih efektif dan efisien, sehingga aplikasi modern lebih cenderung menggunakan *asynchronous programming* dibanding *synchronous programming*.
+
+## Paradigma *Event-driven Programming*
+*Event-driven programming* adalah suatu paradigma dimana program akan melakukan sesuatu sebagai respons jika dan hanya jika suatu masukan diberikan oleh pengguna kepada program. Contohnya, apabila tombol `log out` diklik akan menyebabkan pengguna keluar dari aplikasi. Hal ini merupakan salah satu penerapan *event-driven programming* yang dapat diterapkan dengan menggunakan *event listener* pada JavaScript.
+
+## Penerapan *Asynchronous Programming* pada AJAX
+Seperti yang telah dijelaskan pada pembahasan sebelumnya, *asynchronous programming* adalah program yang dapat mengeksekusi tugas bersamaan dan tidak berurutan. *Asynchronous programming* pada AJAX dapat dilakukan pada beberapa hal, seperti melakukan *request* dan eksekusi fungsi. Contohnya adalah fungsi `refreshProduct` dimana fungsi untuk memperbarui halaman pada aplikasi dapat dikerjakan bersamaan dengan tugas-tugas lain.
+
+## Perbandingan Fetch API dengan Library JQuery
+Fetch API merupakan suatu API bawaan dari JavaScript yang mengerjakan setiap tugas sama seperti cara kerja XHR. Fetch API juga terbilang cukup ringan bila dibandingkan dengan library JQuery karena hanya terfokus pada AJAX saja. Fetch API juga dapat menangani *asynchronous tasks* dengan baik. Fetch API juga tersedia pada *browser* modern, tetapi seringkali tidak tersedia pada *browser* lawas. Di sisi lain, JQuery memiliki kompatibilitas yang baik pada *browser* modern maupun lawas. JQuery juga terbilang mudah digunakan dan memiliki *library* yang besar. JQuery juga memiliki komunitas yang kuat, sehingga fitur-fitur baru selalu akan dikembangkan. Akan tetapi, fungsionalitas dari JQuery lebih terbatas jika dibandingkan dengan Fetch API. Selain itu, berkas javascript JQuery harus menjalankan *command* JQuery yang dapat memberatkan komputer dari sang pengguna dan *server*.
+
+## Referensi Tugas 6
+- https://www.freecodecamp.org/news/asynchronous-programming-in-javascript/#:~:text=In%20traditional%20(synchronous)%20programming%2C,for%20the%20others%20to%20finish.
+- https://reintech.io/blog/what-is-event-driven-programming-in-javascript
+- https://www.geeksforgeeks.org/what-is-an-asynchronous-request-in-ajax/
+- https://www.jscripters.com/jquery-disadvantages-and-advantages/
 </details>
